@@ -11,10 +11,12 @@ function Cart() {
 
 
   const [number, setNumber] = useState(1); //number of item
-  const [totalprice, setTotalprice] = useState(1);
+  const [price, setprice] = useState(1);
+  const [quantity,setquantity]=useState(1);
+  const totalprice = price * quantity;
 const updateQuantityminus=(index)=>
 {
-totalprice > 1 ? setTotalprice(totalprice-1) : setTotalprice(1);
+// totalprice > 1 ? setTotalprice(totalprice-1) : setTotalprice(1);
   var c;
 var temp=[]
     setpage(true)
@@ -28,7 +30,7 @@ var temp=[]
 }
 const updateQuantityplus=(index)=>
 {
-  totalprice < items ? setTotalprice(totalprice +1) : setTotalprice(items);
+  // totalprice < items ? setTotalprice(totalprice +1) : setTotalprice(items);
   var temp=[]
   setpage(true)
   temp=items;
