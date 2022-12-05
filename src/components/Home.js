@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import {useNavigate} from 'react-router-dom';
 import  electro from './electro.jpeg';
-
 import electro2 from './electro2.jpeg';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -80,8 +79,7 @@ const navigateHome=()=>
                     <>
      <Card className="menuCard">
      <div className='content'>
-
-                <div key={e.id}>
+        <div key={e.id}>
                 <h1>{<img src={e.image} className="imgSize1"/>}</h1>
                 </div>
                 </div>
@@ -93,11 +91,7 @@ const navigateHome=()=>
 <Button variant="primary"  className="showMore" >ShowMore</Button>
         </Card>
   </div>       
-
-
-
- <div className='cardArranged'>
-
+<div className='cardArranged'>
 <Card className='mainCard'>
 <h1 style={{color:"black"}}><strong>Men</strong></h1>
     <div className='menuStyle'>

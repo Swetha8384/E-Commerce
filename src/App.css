@@ -8,7 +8,7 @@ body,html{
     height: 100%;
     width: 100%;
     background:white;
-    font-family: cursive;
+    font-family:'Courier New', Courier, monospace;
   }
 }  
 
@@ -18,7 +18,7 @@ body,html{
    
     .jewelleryButton{
       margin-left: 10px;
-      font-family: cursive;
+      font-family:'Courier New', Courier, monospace  ;
     }   
     .menButton{
       margin-left: 10px;
@@ -184,7 +184,7 @@ body,html{
     background-color: lightsteelblue;
     height: 100vh;
     overflow-x: hidden;
-    font-family: cursive;
+    font-family:'Courier New', Courier, monospace;
   }  
   .categeoriesBackground{
     background-color: lightsteelblue; 
