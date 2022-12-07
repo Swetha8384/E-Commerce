@@ -15,9 +15,9 @@ var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjp7ImVtYWlsIjoiam
 var decoded = jwt_decode(token);
  
 console.log(decoded.details._id);
-app.listen(3001,()=>
+app.listen(3002,()=>
 {
-    console.log("running at 3001")
+    console.log("running at 3002")
 })
 
 var client=mongoose.connect("mongodb+srv://swetha:swetha10@e-com.7w5kcvb.mongodb.net/?retryWrites=true&w=majority",{useNewUrlParser:true},(err)=>
@@ -37,22 +37,7 @@ app.post('/login_user',async(req,res)=>
 {
    const {email,password}=req.body;
   
-//    const passwd=await bcrypt.hash(req.body.password,10);
-// //    const log_user=await User.create({
-// //     email,password
-// //    })
-// //    await log_user.save();
-  
-//    if(!email ||!password)
-//    {
-//     res.json("please enter email and password")
-//    } 
 
-//    const user= await User.findOne({email}).select("+password")
-//    if(!user)
-//    {
-//     res.json("user is not found")
-//    }
    var details=new User(req.body)
    const token=details.getJwtToken(details);
 details.save(function (err, data) {
@@ -64,14 +49,6 @@ res.status(200).json({success:true,data,token:token})
 
 }
 })
-
-
-    // const Passwordmatch=await user.comparePassword(password);
-    // if(!Passwordmatch)
-    // {
-    //      res.json("user not found")
-    // }  
-     //const token=user.getJwtToken();
        
     await jwt.sign({id:this._id},process.env.JWT_SECRET_KEY,
            {
@@ -97,17 +74,28 @@ app.get('/addtoken',(req,res)=>
 app.post('/addcart',async(req,res)=>
 
 {
-    console.log(req.body)
+    //console.log(req.body)
    let login_details=await User.findOne({_id:decoded.details._id})
    if(login_details)
    {
-    // const carti=await User.find({product_id})
-    // console.log(carti)
+    //const login_data = JSON.stringify(req.body.cartitems)
+    //login_details.produ.push(login_data)
+    // const product=[]
+    // login=login_details.produ.push(req.body);
+    // console.log(login,"cart")
+    // cartdata=Object.entries(login)
+    // await res.json(cartdata)
+    //  console.log(cartdata,"cartdata")
+
    login_details.produ.push(req.body);
+   console.log(login_details)
    await login_details.save();
+      const carti=await User.findOne({product_id:req.body.product_id})
+     console.log(carti,"cartitems")
     await res.send( login_details)
+
    }
-   console.log( login_details)
+   //console.log( login_details)
 })
 
 app.get('/getcart',async(req,res)=>
@@ -136,49 +124,8 @@ app.delete('/deletecart/:id',(req,res)=>
        res.json({message:'deleted successfully'})
       }
     })
- 
 })
-//addcart_product
-    // User.findOne(decoded.details._id)
-    // .exec((err,cart)=>
-    // {
-    //     if(err)
-    //       return res.json({err})
-    //     if(cart)
-    //     {
-    //        console.log("ok")
-    //         User.findOneAndUpdate({user_id:decoded.details._id},{
-    //             "$push":{
-    //                 "cartitems":[{product_id:req.body.cartitems.product_id,
-    //                     Quantity:req.body.cartitems.Quantity,
-    //                     price:req.body.cartitems.price}]
-    //             }
-                
-    //         }).exec((err,cartitemss)=>
-    //         {
-    //             if(err)
-    //               res.json(err)
-    //             else
-    //              res.json({message:"adding products",cartitemss})
-    //              console.log(cartitemss)
-                 
-    //         })
-    //     }
-    //     else
-    //     { const cart=new Cart({
-    //         user_id:decoded.details._id,
-    //         product_id:req.body.cartitems.product_id,
-    //         Quantity:req.body.cartitems.Quantity,
-    //         price:req.body.cartitems.price
-
-    //         //  cartitems:[req.body.cartitems]
-    //       })
-    //       cart.save()
-    //       res.status(200).json({message:'success',cart})
-    //       console.log(cart);
-    //     }
-
-    app.post('/addcartproducts',async(req,res)=>
+app.post('/addcartproducts',async(req,res)=>
     {
         const c_items=[]
     const c1= req.body;
@@ -222,16 +169,6 @@ app.delete('/deletecart/:id',(req,res)=>
  
   
    
-
-  
-//  console.log(user_id)
-//   console.log(req.body.cartitems[0].Quantity)
-//   console.log(req.body.cartitems[0].price)
-// User.updateOne(
-//    { _id: "6385efa011e22bf63e19398b"},
-//    { $set: { "produ": "Kustom Kidz" } }
-// )
- 
 
 
 

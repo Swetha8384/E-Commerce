@@ -18,10 +18,9 @@ const UserSchema=mongoose.Schema( {
         type: String,
 	    required: true
 	},
-    produ:{
-        type:Array
-        
-   } ,
+    // produ:{
+    //     type:Array
+    //     } ,
 	password:{
          type:String,
 		 required: true
@@ -36,10 +35,10 @@ const UserSchema=mongoose.Schema( {
 })
 
 //register
-// UserSchema.pre("save",async function(next)
-// {
-//     this.password=await bcrypt.hash(this.password,10)
-// })
+UserSchema.pre("save",async function(next)
+{
+    this.password=await bcrypt.hash(this.password,10)
+})
 
     //generating 
 UserSchema.methods.getJwtToken=function(details){

@@ -17,13 +17,11 @@
   "name": "e-commerece",
   "version": "1.0.0",
   "description": "e-com app",
-  "main": "app.js",
+  "main": "usercont.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./app.js",
-    "server": "nodemon ./app.js"
+    "start": "node usercont.js"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {}
+  "license": "ISC"
 }

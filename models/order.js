@@ -36,10 +36,9 @@ const Ordered_items= mongoose.Schema({
        {
            type:Number,
            required:true
-       }
-    ,
+       },
     
-    shippingprice:
+       shippingPrice:
     {
       type:Number,
     },
@@ -47,24 +46,33 @@ const Ordered_items= mongoose.Schema({
     {
       type:Number
     },
-    totalprice:
-    {
-        type:Number,
-        required:true,
-        default:0
-    },
+    // totalprice:
+    // {
+    //     type:Number,
+    //     required:true,
+    //     default:0
+    // },
     orderStatus: {
         type: String,
         required: true,
-        default: "Processing",
+    
       },
     //   deliveredAt: Date,
     //   createdAt: {
     //     type: Date,
     //     default: Date.now,
     //   },
+    totalAmount:
+    {
+      type:Array
+    },
+    Amount_to_pay:
+    {
+        type:Array
     }
-
+    },
+ 
+    { timestamps: true }
     
 )
 module.exports=mongoose.model('ordered_items',Ordered_items)
