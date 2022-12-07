@@ -13,11 +13,8 @@ const Login = ()=>{
   console.log(email,password)  
   nav("/menu")
   var ab={"email":email,"password":password}
-  fetch("http://localhost:3001/login", {
-     
-   
-    method: "POST",
-     
+  fetch("http://localhost:3001/register", {
+      method: "POST", 
     // Adding body or contents to send
     body: JSON.stringify({
       email: email,
@@ -29,8 +26,7 @@ const Login = ()=>{
         "Content-type": "application/json; charset=UTF-8"
     }
 })
- 
-// Converting to JSON
+ // Converting to JSON
 .then(response => response.json())
  
 // Displaying results to console
