@@ -7,9 +7,9 @@ import { MdSecurityUpdateGood } from 'react-icons/md';
 
 function Cart() {
  
-     const [items, setItems] = useState(JSON.parse(localStorage.getItem("id"))); 
+     const [items, setItems] = useState(JSON.parse(localStorage.getItem("cartdata"))); 
 
-
+     console.log(items,'items')
   const [number, setNumber] = useState(1); //number of item
   const [price, setprice] = useState(1);
   const [quantity,setquantity]=useState(1);
@@ -78,17 +78,18 @@ console.log(items)
         {items.map((e,index) => (   
         <tr  key={e.id}>
           <td>{<img src={e.image} className="cartimgSize" />}</td>
-          <td> <p className='titleEclipsis1'>{e.title}</p></td>
+          <td> <p className='titleEclipsis1'>{e.product}</p></td>
           <td>RS. {e.price}</td>
+          
           <td>
             <td>{e.remove}</td>
             <ButtonGroup aria-label="Basic example" className='buttonGroup'>
             <Button variant="info" onClick={()=>updateQuantityminus(index)}>-</Button>
-            <Button variant="info">{items[index].quantity}</Button>
+            <Button variant="info">{e.quantity}</Button>
             <Button variant="info"   onClick={() => updateQuantityplus(index)}>+</Button>
             </ButtonGroup>
           </td>
-          <td>Rs.</td>
+          <td>{e.quantity*e.price}</td>
           <td>
         
           <Button variant="danger" onClick={()=>removefunc(index)} > Remove </Button>   
@@ -114,7 +115,7 @@ console.log(items)
         {items.map((e,index) => (   
         <tr  key={e.id}>
           <td>{<img src={e.image} className="cartimgSize" />}</td>
-          <td> <p className='titleEclipsis1'>{e.title}</p></td>
+          <td> <p className='titleEclipsis1'>{e.product}</p></td>
           <td>RS. {e.price}</td>
           <td>
             <td>{e.remove}</td>
@@ -124,7 +125,7 @@ console.log(items)
             <Button variant="info"   onClick={() =>{ updateQuantityplus()}}>+</Button>
             </ButtonGroup>
           </td>
-          <td>Rs.</td>
+          {/* <td>Rs.1000</td> */}
           <td>
         
           <Button variant="danger" onClick={()=>removefunc(index)} > Remove </Button>   

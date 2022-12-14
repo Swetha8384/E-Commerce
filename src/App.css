@@ -123,20 +123,20 @@ body,html{
     width: 4cm !important;
   }
  } 
-    .showMore{
+    /* .showMore{
       height: 1.3cm;
       width: 3cm;
       margin-top: 0%;
       margin-left: 83%;
-      }
-    @media (max-width:1400px){
+      } */
+    /* @media (max-width:1400px){
       .showMore{
       height: 1.3cm;
       width: 3cm;
       margin-top: 0%;
       margin-left: 0%;
       }
-    }  
+    }   */
     .cardArranged{
       display: flex;
       flex-direction: row;
@@ -207,7 +207,7 @@ body,html{
 }
 
 .electronicCard{
-  width: 29rem;
+  width: 30rem;
    height:9cm;
    margin-bottom: 5px;
    margin-top: 10px;
@@ -216,13 +216,14 @@ body,html{
   display: flex;
   flex-direction: row;
   align-items: center;
+
 }
 .addCart{
   margin-left: 40%;
 }
 .info{
-margin-left: 105px
-}  
+  scroll-margin-top: 105px
+  }  
 .titleEclipsis{
   display: inline-block;
   width: 400px;

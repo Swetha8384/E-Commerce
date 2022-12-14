@@ -13,7 +13,8 @@ const Login = ()=>{
   console.log(email,password)  
   nav("/menu")
   var ab={"email":email,"password":password}
-  fetch("http://localhost:3001/register", {
+  localStorage.setItem('logindata',JSON.stringify(ab))
+  fetch("http://localhost:3006/api/login/register", {
       method: "POST", 
     // Adding body or contents to send
     body: JSON.stringify({

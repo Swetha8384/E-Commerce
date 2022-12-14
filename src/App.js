@@ -9,6 +9,7 @@ import Men from './components/Men';
 import Myprofile from './components/Myprofile';
 import Women from './components/Women';
 import Cart from './components/Cart';
+import Myproduct from './Myproduct';
 import {Routes,Route,Navigate, Link, Outlet} from 'react-router-dom';
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
  <Route path="/menu/Myprofile" element={<Myprofile/>}/>
  <Route path="/menu/Women" element={<Women />}/>
  <Route path="/menu/cart" element={<Cart  />}/>
+ <Route path="/menu/Myproduct" element={<Myproduct  />}/>
  </Route>
  </Routes>
 </div>

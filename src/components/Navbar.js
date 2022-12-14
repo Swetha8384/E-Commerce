@@ -50,8 +50,11 @@ function Menu() {
     nav("/menu/cart")
   }
 
+  const Myproducts=()=>{
+    nav("/menu/Myproduct")
+  }
     const[search,setSearch]=useState('')
-    
+    const[Myproduct,setMyproduct]=useState('')
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -79,7 +82,7 @@ function Menu() {
     <Button variant="dark" onClick={jewelleryHandler} className='jewelleryButton'><GiGemChain/><h6>Jewellery</h6></Button>
     <Button variant="dark" onClick={menHandler} className='menButton'><GiClothes/><h6>Men</h6></Button>
     <Button variant="dark" onClick={womenHandler}  className='womenButton'><GiLoincloth/><h6>Women</h6></Button>
-
+    {/* <Button variant="dark" onClick={Myproducts}  className='ProductsButton'><h6>Myproducts</h6></Button> */}
 <div>
   <Form className="d-flex">
     <Form.Control
@@ -93,6 +96,9 @@ function Menu() {
     />
     <Button type="submit" variant="success">Search</Button>
   </Form>
+</div>
+<div className='Myproducts'>
+<Button variant="primary" onClick={Myproducts}>Myproduct <Badge bg="danger" ></Badge></Button>
 </div>
   <div className='cart'>
   <Button variant="warning" onClick={cartLogo}><BsCart/>cart <Badge bg="danger" ></Badge></Button>
