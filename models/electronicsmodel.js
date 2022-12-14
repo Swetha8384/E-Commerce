@@ -19,10 +19,10 @@ const Electronics=mongoose.Schema( {
         type: String,
         required: true
     },
-    category:{
-        type: String,
-        required: true
-    },
+    // category:{
+    //     type: String,
+    //     required: true
+    // },
     price: {
         type: Number,
         required: true
@@ -33,5 +33,12 @@ const Electronics=mongoose.Schema( {
     }
 
  })
+// const Cart=mongoose.Schema({
+//     items:[Cart_items], 
+//     subTotal: {
+//         default: 0,
+//         type: Number
+//     }
+//  })
 
  module.exports =  mongoose.model('product', Electronics);

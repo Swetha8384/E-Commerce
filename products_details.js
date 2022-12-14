@@ -4,10 +4,14 @@ var mongoose=require('mongoose');
 const multer=require('multer');
 const fs=require('fs');
 //const user_data=require('./models/user');
-const product=require('./models/product')
+const product=require('./models/electronicsmodel')
+const womenproduct=require('./models/womenmodel')
+const menproduct=require('./models/menmodel')
+const jewelleryproduct=require('./models/jewellerymodel')
 const cart=require('./models/cart');
 //const routes = require('./routes/userrouter');
-
+const cors = require('cors');
+app.use(cors());
 
 app.listen(3001,()=>{
     console.log("running at port 3001")
@@ -69,12 +73,12 @@ app.post('/post_products',upload.single('productimages'), async(req,res) => {
     image:{data:fs.readFileSync('Product_images/'+ req.file.filename),
     contentType:"image/jpg"},
     description:req.body.description,
-    category:req.body.category,
+   // category:req.body.category,
     price:req.body.price,
     quantity:req.body.quantity
   })
   await productdetails.save();
-  res.status(200).json({success:true})
+  res.status(200).json({success:true,data:productdetails})
 })
 
 app.get('/get_products',async(req,res)=>{
@@ -127,7 +131,66 @@ app.put('/update_id/:id',(req,res)=>
    }
 })
 
+app.post('/post_women_products',upload.single('productimages'), async(req,res) => {
+  const productdetails=new womenproduct({
+    product_id:req.body.product_id,
+    product_name: req.body.product_name,
+    image:{data:fs.readFileSync('Product_images/'+ req.file.filename),
+    contentType:"image/jpg/webp"},
+    description:req.body.description,
+    //category:req.body.category,
+    price:req.body.price,
+    quantity:req.body.quantity
+  })
+  await productdetails.save();
+  res.status(200).json({success:true,data:productdetails})
+})
 
+app.get('/get_women_products',async(req,res)=>{
+  const get_womenproducts=womenproduct.find();
+  res.json(await get_womenproducts);
+})
+
+
+app.post('/post_men_products',upload.single('productimages'), async(req,res) => {
+  const productdetails=new menproduct({
+    product_id:req.body.product_id,
+    product_name: req.body.product_name,
+    image:{data:fs.readFileSync('Product_images/'+ req.file.filename),
+    contentType:"image/jpg"},
+    description:req.body.description,
+    category:req.body.category,
+    price:req.body.price,
+    quantity:req.body.quantity
+  })
+  await productdetails.save();
+  res.status(200).json({success:true,data:productdetails})
+})
+
+app.get('/get_men_products',async(req,res)=>{
+  const get_menproducts=menproduct.find();
+  res.json(await get_menproducts);
+})
+
+app.post('/post_jewellery_products',upload.single('productimages'), async(req,res) => {
+  const productdetails=new jewelleryproduct({
+    product_id:req.body.product_id,
+    product_name: req.body.product_name,
+    image:{data:fs.readFileSync('Product_images/'+ req.file.filename),
+    contentType:"image/jpg"},
+    description:req.body.description,
+    category:req.body.category,
+    price:req.body.price,
+    quantity:req.body.quantity
+  })
+  await productdetails.save();
+  res.status(200).json({success:true,data:productdetails})
+})
+
+app.get('/get_jewllery',async(req,res)=>{
+  const get_jewellery_products=jewelleryproduct.find();
+  res.json(await get_jewellery_products);
+})
 // app.post('/login',async(req,res)=>
 // {
 //     const login_data = new user_data(req.body);

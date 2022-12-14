@@ -1,11 +1,15 @@
 var express=require('express');
 var app=express();
+const bodyParser = require('body-parser');
 var mongoose=require('mongoose');
 const Cart=require('./models/cart')
-const Product=require('./models/product')
+var cors=require('cors')
+app.use(cors());
+//const Product=require('./models/product')
+
 // const multer=require('multer');
 // const fs=require('fs');
-app.listen(3001,()=>
+app.listen(3004,()=>
 {
     console.log("running at 3001")
 })
@@ -25,37 +29,41 @@ app.use(express.json())
 app.post('/post_cart',async(req,res)=>
 {
     
-    const { user_id,product_id, productname,Quantity,price,stock} =req.body;
+    const { user_id,product_id, productname,Quantity,price,} =req.body;
     const cart=await Cart.create({
-        user_id,product_id, productname,Quantity,price,stock
+        user_id,product_id, productname,Quantity,price
     });     
     res.status(200).json({success: true,cart})
     
 })
-
+// const userId=req.userId._id
+app.use(express.json({limit: '50mb'}));
+app.use(bodyParser.json({ limit: "200mb" }))
+const userId = "638e2546bdfe9210f4ac820b"; 
 app.post("/cart", async (req, res) => {
-    const { productId,name, quantity,  price } = req.body;
-    console.log(quantity,"quantity")
-    const userId = "6385e2624bb1a01060f60920"; 
-  
+    const {image, price,product, quantity  } = req.body;
+      
+    console.log(quantity,"quantityyyyyyyyyyyyyyyyyyy")
+    Totalprice=quantity*price;
+    
     try {
       let cart = await Cart.findOne({ userId });
       console.log(cart,"cart")
       if (cart) {
         //cart exists for user
-        let itemIndex = cart.products.findIndex(p => p.productId == productId);
+        let itemIndex = cart.products.findIndex(p => p.product == product);
          console.log(itemIndex,"index")
         if (itemIndex > -1) {
           //product exists in the cart, update the quantity
           let productItem = cart.products[itemIndex];
-          console.log(productItem,"prod")
           productItem.quantity += quantity;
-          console.log(productItem.quantity,"quan");
+          productItem.Totalprice=productItem.quantity*price;
           cart.products[itemIndex] = productItem;
-          
+          // console.log(productItem,"prod")
+          // console.log(productItem.quantity,"quan");
         } else {
-          //product does not exists in cart, add new item
-          cart.products.push({ productId, name,quantity, price });
+          //product does not exists in cart add new item
+          cart.products.push({ image, product,quantity, price , Totalprice});
         }
         cart1 = await cart.save();
        
@@ -63,7 +71,7 @@ app.post("/cart", async (req, res) => {
          console.log(cart1,"cart1")
       } else {
         const cart_products = {
-             userId, products: [{ productId, name,quantity, price }]
+             userId, products: [{ image, product,quantity, price, Totalprice }]
             };
         console.log(cart_products)
         var cartdetails=new Cart(cart_products)
@@ -110,25 +118,23 @@ app.put('/update_cart/:id',async(req,res)=>
 
 app.delete('/delete_pro_cart/:id',async(req,res)=>
 {
-const cartData = await Cart.findById({_id:req.params.id});
-if (!cartData) {
-  res.json("Items is not found with this id", 404);
-}
-await cartData.remove({"productId": 1});
-res.status(200).json({success: true,message: "Item removed from cart"});
+     let cart = await Cart.findOne({ userId });
+      //console.log(cart,"cart")
+     let cartData = cart.products.pull({_id:req.params.id });
+     await cart.save();
+    //  if (!cartData) {
+    //      res.status(404).json("Items is not found with this id");
+    //  }
+     res.status(200).json({success: true,message: "Item removed from cart",cartData});
+//const cartData = await Cart.findByIdAndDelete({_id:req.params.id});
+//const cartData=await Cart.pull({ _id:req.params.id })
+//await cartData.remove({_id:new ObjectId(id)});
+//console.log(cartData,"cartdata")
 })
 
 
 
-//adding products to cart
-app.post('/addcart',async(req,res)=>
-{
 
-
-const  productid = req.body.product_id;
-await res.status(200).json("success")
-console.log(productid);
-})
 
 //const { product_id,Quantity} =req.body.cartitems
 //      const cart=await Cart.create({

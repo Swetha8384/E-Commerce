@@ -3,15 +3,19 @@ const CartSchema = new mongoose.Schema(
     {
       userId: {
         // type: mongoose.Schema.Types.ObjectId,
-        // ref: "User"
-        type:String
+        // ref: "user"
+       type:String
       },
       products: [
         {
-          productId: Number,
-          productname:String,
+          
+          image:Buffer,
+          //productId: Number,
+          product:String,
           quantity: Number,
-          price: Number
+          price: Number,
+          Totalprice:Number
+          
         }
       ],
     },

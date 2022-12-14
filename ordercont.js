@@ -49,7 +49,6 @@ app.post('/order',async(req,res)=>{
     //res.status(201).json({success: true,createorder })
     // console.log(createorder.shippingPrice,"shipping")
     // console.log(createorder.tax,"tax")
-   
     res.status(200).json({ success: true,createorder,Amount_to_pay: totalnetamount})
     })
 
@@ -78,9 +77,7 @@ app.get('/getOrder/:id' ,async (req,res) =>{
 
 
 app.delete('/deleteOrder/:id' ,async (req,res) =>{
-
-    const order = await Order.findById({_id:req.params.id});
-    
+  const order = await Order.findById({_id:req.params.id});
     if(!order){
       res.json("Order not found with this Id", 404);
     }
