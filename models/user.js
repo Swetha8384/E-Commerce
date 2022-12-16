@@ -6,14 +6,21 @@ dotenv.config();
 const crypto=require('crypto');
 //global.config = require('config');
 const UserSchema=mongoose.Schema( {
-	// firstname:{
-    //     type:String,
-    //     required:true
+	firstname:{
+        type:String,
+        
+    },
+    lastname:{
+        type:String,
+
+    },
+    // username:{
+    //     type:String
     // },
-    // lastname:{
-    //     type:String,
-    //     required:true
-    // },
+    role:{
+         type:Number,
+         default:0
+        },
 	email:{
         type: String,
 	    required: true
@@ -24,11 +31,11 @@ const UserSchema=mongoose.Schema( {
 	password:{
          type:String,
 		 required: true
-	} 
-	// mobile:{
-    //     type:Number,
-    //     required:true
-    // }
+	} ,
+	mobile:{
+        type:Number,
+        required:true
+    }
     ,
     resetPasswordToken:String
 
@@ -42,6 +49,7 @@ UserSchema.pre("save",async function(next)
 
     //generating 
 UserSchema.methods.getJwtToken=function(details){
+    console.log(details)
      return jwt.sign({details},process.env.JWT_SECRET_KEY,
         {
             expiresIn:"6d"
