@@ -26,6 +26,8 @@ const Ordered_items= mongoose.Schema({
         {
             type:Number,
             required:true
+            // type: mongoose.Schema.Types.ObjectId,
+            //     ref: "user"
         },
         Quantity:
         {

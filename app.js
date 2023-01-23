@@ -1,17 +1,19 @@
 var express=require('express');
 var app=express();
-var mongoose=require('mongoose')
-
+const mongoose=require('mongoose')
+const bodyParser=require('body-parser')
+const cookieParser=require('cookie-parser')
 
 const login=require('./routes/userrouter')
 const allproducts=require('./routes/productroute')
 const cartproducts=require('./routes/cartroute')
 const orders=require('./routes/orderroute')
 
+
 app.listen(3006,()=>{
     console.log("running at port 3006")
 })
-var client=mongoose.connect("mongodb+srv://swetha:swetha10@e-com.7w5kcvb.mongodb.net/?retryWrites=true&w=majority",{useNewUrlParser:true},(err)=>
+var client=mongoose.connect(process.env.mongodb_connection,{useNewUrlParser:true},(err)=>
 {
     if(!err) 
     {
@@ -22,7 +24,10 @@ var client=mongoose.connect("mongodb+srv://swetha:swetha10@e-com.7w5kcvb.mongodb
         console.log('db error');
     } 
 })
-//login user
+
+app.use(bodyParser.json());
+app.use(cookieParser());
+//login user,userprofile
 app.use('/api/login',login)
 
 //products
@@ -33,4 +38,7 @@ app.use('/api/cart',cartproducts)
 
 //order
 app.use('/api/orders',orders)
+
+//userprofile
+//app.use('/api/profiles',profile)
 console.log("running")

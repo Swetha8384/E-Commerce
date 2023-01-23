@@ -8,7 +8,6 @@ const crypto=require('crypto');
 const UserSchema=mongoose.Schema( {
 	firstname:{
         type:String,
-        
     },
     lastname:{
         type:String,
@@ -21,8 +20,10 @@ const UserSchema=mongoose.Schema( {
          type:Number,
          default:0
         },
+      
 	email:{
         type: String,
+        unique:false,
 	    required: true
 	},
     // produ:{
@@ -34,9 +35,22 @@ const UserSchema=mongoose.Schema( {
 	} ,
 	mobile:{
         type:Number,
-        required:true
-    }
-    ,
+        
+    },
+    verified:
+    {
+        default:false
+    },
+    token:
+    {
+        type:String
+    },
+    // cart:[{
+
+    //     // type: mongoose.Schema.Types.ObjectId,
+    //     // ref: "carts"
+    //     type:String
+    //  }],
     resetPasswordToken:String
 
 })
@@ -64,11 +78,11 @@ UserSchema.methods.getJwtToken=function(details){
 
 
 //forgot password
-// UserSchema.methods.getResetToken=function()
-// {
-//     const resetToken=crypto.randomBytes(20).toString("hex"); //generating token
-//     this.resetPasswordToken=crypto.createHash("sha256").update(resetToken).digest("hex");
-//     resetToken.json(resetToken);    
-// }
+UserSchema.methods.getResetToken=function()
+{
+    const resetToken=crypto.randomBytes(20).toString("hex"); //generating token
+    this.resetPasswordToken=crypto.createHash("sha256").update(resetToken).digest("hex");
+    resetToken.json(resetToken);    
+}
 
 module.exports=mongoose.model('user',UserSchema);
